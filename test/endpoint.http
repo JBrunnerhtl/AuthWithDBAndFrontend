@@ -1,5 +1,5 @@
 @baseUrl=http://localhost:3000
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9LCJleHAiOjE3NzU0NzY0NTIuMTIsImlhdCI6MTc3NTQ3NTU1Mn0._-7rYpPeVvZMdroCc2D4JaCvlpXY0lZJQ5gwXCw9ON0
 POST {{baseUrl}}/auth/login
 content-type: application/json
 
@@ -12,3 +12,4 @@ content-type: application/json
 ###
 
 GET {{baseUrl}}/car/all
+authorization: Bearer {{token}}

@@ -1,0 +1,22 @@
+import {NextFunction} from "express";
+import {StatusCodes} from "http-status-codes";
+import * as jwt from 'jsonwebtoken';
+import "dotenv/config"
+import {AuthRequest} from "../types/types";
+import {JwtPayload} from "jsonwebtoken";
+import type { Request, Response } from "express";
+export function isAuthenticated(req: Request, res: Response, next: NextFunction): void {
+    try {
+        const head: string | undefined= req.header("authorization")?.replace("Bearer ", "");
+        if(!head) {
+            throw new Error("No token provided");
+        }
+        const payload = jwt.verify(head, process.env.SECRET_KEY || "test");
+        (req as unknown as AuthRequest).payload = payload as JwtPayload;
+        next();
+    }catch (e) {
+        if(e instanceof Error) {
+            res.status(StatusCodes.UNAUTHORIZED).send(e.message);
+        }
+    }
+}

@@ -1,3 +1,5 @@
+import {JwtPayload} from "jsonwebtoken";
+
 export type UserInput = {
     email: string;
     password: string;
@@ -17,4 +19,8 @@ export type UserClaims = {
 export type Car = {
     id: number;
     name: string;
+}
+
+export interface AuthRequest extends Request {
+    payload: JwtPayload;
 }

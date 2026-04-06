@@ -3,11 +3,12 @@ import type { Request, Response } from 'express';
 import {StatusCodes} from "http-status-codes";
 import {CarService} from "../service/car-service";
 import {Car} from "../types/types";
+import {isAuthenticated} from "../middleware/auth-handler";
 
 export const carRouter = Router();
 
 
-carRouter.get("/all", (req: Request, res: Response) => {
+carRouter.get("/all", isAuthenticated, (req: Request, res: Response) => {
     try {
         const cars: Car[] = CarService.getAllCars();
         return res.status(StatusCodes.OK).json(cars);
@@ -16,7 +17,7 @@ carRouter.get("/all", (req: Request, res: Response) => {
     }
 })
 
-carRouter.get("/:id", (req: Request, res: Response) => {
+carRouter.get("/:id", isAuthenticated, (req: Request, res: Response) => {
     try {
 
     }catch (e) {
