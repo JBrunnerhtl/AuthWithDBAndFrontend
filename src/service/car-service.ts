@@ -9,4 +9,7 @@ export class CarService {
         }
         return cars;
     }
+    public static getCarById(id: number) : Car | undefined {
+        return CarRepo.getCarById(id);
+    }
 }

@@ -1,5 +1,6 @@
 @baseUrl=http://localhost:3000
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9LCJleHAiOjE3NzU0NzY0NTIuMTIsImlhdCI6MTc3NTQ3NTU1Mn0._-7rYpPeVvZMdroCc2D4JaCvlpXY0lZJQ5gwXCw9ON0
+@tokenAdmin=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIn0sImV4cCI6MTc3NTQ3NzMxMS45MzUsImlhdCI6MTc3NTQ3NjQxMX0.yK_B9tCdQmdFf_4oawvQ3nZG4QE3LqLSWCt6eRQb_-Q
 POST {{baseUrl}}/auth/login
 content-type: application/json
 
@@ -10,6 +11,20 @@ content-type: application/json
 }
 
 ###
+POST {{baseUrl}}/auth/login
+content-type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "789"
+
+}
+
+###
 
 GET {{baseUrl}}/car/all
 authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/car/2
+authorization: Bearer {{tokenAdmin}}

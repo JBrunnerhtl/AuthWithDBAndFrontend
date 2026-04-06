@@ -1,20 +1,18 @@
-import Database  from "better-sqlite3"
-import * as sqlite from "better-sqlite3"
+import Database from "better-sqlite3"
 import * as crypt from "bcrypt";
 import "dotenv/config"
+
 export class DB {
     private static DB_NAME: string = process.env.DB_NAME || "default.db";
     public static createConnection() : Database.Database {
-        const val: Database.Database = new Database(this.DB_NAME, {
+        return new Database(this.DB_NAME, {
             fileMustExist: false,
             verbose: (s) => console.log(s),
-        })
-        this.insertDefaultValues(val)
-        return val;
+        });
     }
 
 
-    private static insertDefaultValues(connection: Database.Database) : void {
+    public static insertDefaultValues(connection: Database.Database) : void {
         try {
             const userTable = `CREATE TABLE IF NOT EXISTS users (` +
                 `EMAIL TEXT PRIMARY KEY, ` +

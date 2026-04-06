@@ -20,3 +20,17 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
         }
     }
 }
+
+export function isAdmin(req: Request, res: Response, next: NextFunction): void {
+    try {
+        const payload: JwtPayload = (req as unknown as AuthRequest).payload as JwtPayload;
+        if(payload.user.role !== "admin") {
+            throw new Error("You don't have permission to perform this action");
+        }
+        next();
+    }catch (e) {
+        if(e instanceof Error) {
+            res.status(StatusCodes.UNAUTHORIZED).send(e.message);
+        }
+    }
+}
