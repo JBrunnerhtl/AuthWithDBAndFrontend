@@ -8,3 +8,7 @@ content-type: application/json
     "password": "123456"
 
 }
+
+###
+
+GET {{baseUrl}}/car/all

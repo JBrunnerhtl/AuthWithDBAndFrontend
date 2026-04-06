@@ -13,3 +13,8 @@ export type UserClaims = {
     email: string;
     role: string;
 }
+
+export type Car = {
+    id: number;
+    name: string;
+}

@@ -2,13 +2,14 @@ import express from "express";
 import {Request, Response} from "express";
 import {StatusCodes} from "http-status-codes";
 import {userRouter} from "./router/user-router";
+import {carRouter} from "./router/car-router";
 import "dotenv/config"
 const app = express();
 
 app.use(express.json());
 
 app.use("/auth", userRouter);
-
+app.use("/car", carRouter);
 app.get("/", (req:Request, res:Response) => {
     return res.status(StatusCodes.OK).send("Hello world");
 })

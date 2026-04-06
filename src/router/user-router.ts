@@ -30,6 +30,8 @@ userRouter.post("/login", async (req: Request, res: Response) => {
             accessToken: token,
         });
     }catch(err) {
-        return res.status(StatusCodes.UNAUTHORIZED).send(err.message);
+        if(err instanceof Error) {
+            return res.status(StatusCodes.UNAUTHORIZED).send(err.message);
+        }
     }
 })
