@@ -6,6 +6,11 @@ form.addEventListener("submit", async (e) => {
     e.preventDefault();
     await login();
 })
+const logoutButton = document.getElementById("logout-button") as HTMLButtonElement;
+logoutButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    logout();
+})
 export async function login() {
     const email = document.getElementById("email") as HTMLInputElement;
     const password = document.getElementById("password") as HTMLInputElement;
@@ -26,4 +31,8 @@ export async function login() {
     } catch (err) {
         console.error(err);
     }
+}
+
+export function logout() {
+    sessionStorage.removeItem('token')
 }
