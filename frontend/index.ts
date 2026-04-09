@@ -1,5 +1,11 @@
 const url = "http://localhost:3000";
 import type {UserInput} from './types'
+
+const form = document.getElementById("login-form") as HTMLFormElement;
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    await login();
+})
 export async function login() {
     const email = document.getElementById("email") as HTMLInputElement;
     const password = document.getElementById("password") as HTMLInputElement;

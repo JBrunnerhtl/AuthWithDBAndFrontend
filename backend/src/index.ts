@@ -6,12 +6,13 @@ import {carRouter} from "./router/car-router";
 import {DB} from "./database/db";
 import "dotenv/config"
 import Database from "better-sqlite3";
+import cors from "cors"
 const app = express();
 const db: Database.Database = DB.createConnection();
 DB.insertDefaultValues(db);
 db.close();
 app.use(express.json());
-
+app.use(cors())
 app.use("/auth", userRouter);
 app.use("/car", carRouter);
 app.get("/", (req:Request, res:Response) => {
