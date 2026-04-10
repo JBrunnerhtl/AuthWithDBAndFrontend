@@ -43,6 +43,7 @@ export async function login() {
         if(response.status !== StatusCodes.OK) throw new Error(response.statusText);
         const {userClaims, expiresAt, accessToken } = await response.json();
         sessionStorage.setItem('token', accessToken)
+        alert(`Welcome ${userClaims.email}, you are logged in as ${userClaims.role}. Your token expires at ${new Date(expiresAt).toLocaleTimeString()}`);
     } catch (err) {
         if(err instanceof Error) {
             alert(err.message);
@@ -108,8 +109,6 @@ export async function fetchSpecificCar() {
         }
         numberOfCar.value = "";
         table.innerHTML=""
-    }finally {
-
     }
 }
 
