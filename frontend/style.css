@@ -34,7 +34,7 @@
 .login-button:hover {
     background-color: green;
     color: white;
-    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
 }
 
 .logout-button {
@@ -46,6 +46,36 @@
 .logout-button:hover {
     background-color: red;
     color: white;
-    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+.fetchCarsButton {
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    background-color: coral;
+    scale: 1;
+    transition: scale 0.5s;
+    margin: 5px;
+}
+
+.fetchCarsButton:hover {
+    transition: scale 0.5s;
+    scale: 1.05;
+}
+table {
+    border: 2px solid black;
+    margin: 5px;
+    align-items: center;
+    border-collapse: collapse;
+}
+td {
+   padding: 7px;
+   border: 1px solid black;
+}
+tr:first-child {
+    font-weight: bold;
+    font-size: large;
 }
 
