@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <title>My App</title>
     <meta charset="utf-8">
@@ -20,13 +20,19 @@
         </form>
     </div>
 
-    <div>
-        <div>
+    <div class="flex-container" style="margin-top: 3rem; flex-direction: column">
+        <div class="flex-container" style="margin-top: 3rem; flex-direction: column">
             <button id="fetch-cars" class="fetchCarsButton">Lade Autos</button>
             <table id="cars-table">
-
             </table>
         </div>
+        <div class="flex-container" style="margin-top: 3rem; flex-direction: column">
+            <input id="car-id" type="text" placeholder="Car Id" class="space car-input"/><br>
+            <button id="fetch-specific-car" class="fetchCarsButton">Lade Auto</button>
+            <table id="car-table">
+            </table>
+        </div>
+
     </div>
 
 

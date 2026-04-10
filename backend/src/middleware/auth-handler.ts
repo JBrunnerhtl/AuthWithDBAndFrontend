@@ -16,7 +16,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
         next();
     }catch (e) {
         if(e instanceof Error) {
-            res.status(StatusCodes.UNAUTHORIZED).send(e.message);
+            res.status(StatusCodes.UNAUTHORIZED).send({message: e.message});
         }
     }
 }
@@ -30,7 +30,7 @@ export function isAdmin(req: Request, res: Response, next: NextFunction): void {
         next();
     }catch (e) {
         if(e instanceof Error) {
-            res.status(StatusCodes.UNAUTHORIZED).send(e.message);
+            res.status(StatusCodes.FORBIDDEN).send({message: e.message});
         }
     }
 }

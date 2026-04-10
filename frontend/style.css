@@ -1,7 +1,7 @@
 .flex-container {
     display: flex;
-    align-content: center;
     justify-content: center;
+    align-items: center;
 }
 .space {
     margin: 10px;
@@ -15,14 +15,16 @@
 }
 
 .input-field:focus {
-    transition: outline-color 200ms ease-in-out;
-    outline: 2px solid cadetblue;
+    transition: border 200ms ease-in-out;
+    border: 2px solid coral;
 
 }
 
 .input-field {
+    outline: none;
     border-radius: 5px;
     padding: 5px;
+    transition: border 200ms ease-in-out;
 }
 
 .login-button {
@@ -58,6 +60,8 @@
     scale: 1;
     transition: scale 0.5s;
     margin: 5px;
+    border-radius: 5px;
+
 }
 
 .fetchCarsButton:hover {
@@ -67,8 +71,8 @@
 table {
     border: 2px solid black;
     margin: 5px;
-    align-items: center;
     border-collapse: collapse;
+    width: fit-content;
 }
 td {
    padding: 7px;
@@ -79,3 +83,14 @@ tr:first-child {
     font-size: large;
 }
 
+.car-input {
+    outline: none;
+    transition: border 200ms ease-in-out;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.car-input:focus {
+    border: 2px solid coral;
+    transition: border 200ms ease-in-out;
+}

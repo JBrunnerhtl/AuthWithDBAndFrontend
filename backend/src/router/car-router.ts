@@ -21,7 +21,7 @@ carRouter.get("/all", isAuthenticated, (req: Request, res: Response) => {
 carRouter.get("/:id", isAuthenticated, isAdmin,(req: Request, res: Response) => {
     try {
         const id: string | string[] = req.params.id;
-        if(Number.isNaN(id)) {
+        if(Number.isNaN(Number(id))) {
             throw new Error(`${id} is not a valid number`);
         }
         const car: Car | undefined= CarRepo.getCarById(Number(id));

@@ -24,3 +24,7 @@ export type Car = {
 export interface AuthRequest extends Request {
     payload: JwtPayload;
 }
+
+export type AuthErrorResponse = {
+    message: string;
+}

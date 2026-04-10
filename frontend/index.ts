@@ -1,5 +1,5 @@
 const url = "http://localhost:3000";
-import type {UserInput, Car} from './types'
+import type {UserInput, Car, AuthErrorResponse} from './types'
 import {StatusCodes} from "http-status-codes";
 
 const form = document.getElementById("login-form") as HTMLFormElement;
@@ -12,10 +12,16 @@ logoutButton.addEventListener("click", async (e) => {
     e.preventDefault();
     logout();
 });
-const fetchCarButton = document.getElementById("fetch-cars") as HTMLButtonElement;
-fetchCarButton.addEventListener("click", async (e) => {
+const fetchCarsButton = document.getElementById("fetch-cars") as HTMLButtonElement;
+fetchCarsButton.addEventListener("click", async (e) => {
     e.preventDefault();
     await fetchCars();
+})
+
+const fetchSpecificCarButton = document.getElementById("fetch-specific-car") as HTMLButtonElement;
+fetchSpecificCarButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await fetchSpecificCar();
 })
 export async function login() {
     const email = document.getElementById("email") as HTMLInputElement;
@@ -38,7 +44,9 @@ export async function login() {
         const {userClaims, expiresAt, accessToken } = await response.json();
         sessionStorage.setItem('token', accessToken)
     } catch (err) {
-        alert("Login failed. Please check your credentials and try again.");
+        if(err instanceof Error) {
+            alert(err.message);
+        }
         console.error(err);
     }finally {
         email.value = "";
@@ -63,32 +71,66 @@ export async function fetchCars() {
         });
         if(response.status !== StatusCodes.OK) throw new Error(response.statusText);
         const cars: Car[] = await response.json();
+        createTable(cars, "cars-table");
 
-        const tdId = document.createElement("td");
-        const tdName = document.createElement("td");
-        const tr = document.createElement("tr");
-        tdId.textContent = "Id";
-        tdName.textContent = "Name";
-        tr.appendChild(tdId);
-        tr.appendChild(tdName);
-        carTable.appendChild(tr);
-        cars.forEach(car => {
-            const tr = document.createElement("tr");
-            const tdName = document.createElement("td");
-            const tdId = document.createElement("td");
-            tdName.textContent = car.name;
-            tdId.textContent = car.id.toString();
-            tr.appendChild(tdId);
-            tr.appendChild(tdName);
-            carTable.appendChild(tr);
-        });
     }catch(err) {
-        alert("An error occurred while fetching cars. Please try again later. Are you sure you are logged in?");
+        if(err instanceof Error) {
+            alert(err.message);
+        }
         carTable.innerHTML=""
         console.log(err);
     }
 }
 
-export function fetchSpecificCar(id: number) {
+export async function fetchSpecificCar() {
+    const numberOfCar = document.getElementById("car-id") as HTMLInputElement;
+    const table = document.getElementById("car-table") as HTMLTableElement;
+    table.innerHTML = '';
+    try {
+        if(numberOfCar.value === "" || numberOfCar.value === undefined) throw new Error("You need to enter an id")
+       const response = await fetch(url + "/car/" + numberOfCar.value, {
+           method: "GET",
+           headers: {
+               "Authorization": `Bearer ${sessionStorage.getItem('token')}`,
+           }
+       });
+       if(response.status === StatusCodes.FORBIDDEN) throw new Error("You don't have permission to perform this action");
+       if(response.status !== StatusCodes.OK) {
+           const responseAuth: AuthErrorResponse = await response.json();
+           throw new Error(responseAuth.message);
+       }
+       const car: Car = await response.json();
+       createTable([car], "car-table");
+    }catch(err) {
+        console.log(err)
+        if(err instanceof Error) {
+            alert(err.message);
+        }
+        numberOfCar.value = "";
+        table.innerHTML=""
+    }finally {
 
+    }
+}
+
+function createTable(cars: Car[], tableId: string) {
+    const carTable = document.getElementById(tableId) as HTMLTableElement;
+    const tdId = document.createElement("td");
+    const tdName = document.createElement("td");
+    const tr = document.createElement("tr");
+    tdId.textContent = "Id";
+    tdName.textContent = "Name";
+    tr.appendChild(tdId);
+    tr.appendChild(tdName);
+    carTable.appendChild(tr);
+    cars.forEach(car => {
+        const tr = document.createElement("tr");
+        const tdName = document.createElement("td");
+        const tdId = document.createElement("td");
+        tdName.textContent = car.name;
+        tdId.textContent = car.id.toString();
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        carTable.appendChild(tr);
+    });
 }
