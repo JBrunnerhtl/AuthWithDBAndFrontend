@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 5px;
 }
 .space {
     margin: 10px;
@@ -93,4 +94,10 @@ tr:first-child {
 .car-input:focus {
     border: 2px solid coral;
     transition: border 200ms ease-in-out;
+}
+
+.header-in-form {
+    text-align: center;
+    padding: 5px;
+    color: white;
 }

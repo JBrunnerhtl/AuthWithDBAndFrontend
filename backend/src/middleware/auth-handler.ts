@@ -16,7 +16,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
         next();
     }catch (e) {
         if(e instanceof Error) {
-            res.status(StatusCodes.UNAUTHORIZED).send({message: e.message});
+            res.status(StatusCodes.UNAUTHORIZED).send({message: "No token provided"});
         }
     }
 }

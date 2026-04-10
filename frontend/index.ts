@@ -70,7 +70,10 @@ export async function fetchCars() {
                 "Authorization": `Bearer ${sessionStorage.getItem('token')}`,
             },
         });
-        if(response.status !== StatusCodes.OK) throw new Error(response.statusText);
+        if(response.status !== StatusCodes.OK) {
+            const responseAuth: AuthErrorResponse = await response.json();
+            throw new Error(responseAuth.message);
+        }
         const cars: Car[] = await response.json();
         createTable(cars, "cars-table");
 

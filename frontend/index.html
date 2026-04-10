@@ -7,19 +7,34 @@
     <script type="module" src="index.ts" defer></script>
 </head>
 <body>
-    <div class="flex-container" style="margin-top: 3rem">
-        <form id="login-form" class="login-form">
-            <label for="email" class="space" style="color: white">Email</label><br>
-            <input id="email" type="email" placeholder="Email" class="space input-field"/><br>
-            <label for="password" class="space" style="color: white">Password</label><br>
-            <input id="password" type="password" placeholder="Password" class="space input-field"/><br>
-            <div class="flex-container">
-            <input type="submit" value="Login" class="space login-button"/>
-            <button type="button" id="logout-button" class="space logout-button">Logout</button>
-            </div>
-        </form>
-    </div>
+    <div class="flex-container" style="flex-direction: row">
+        <div class="flex-container" style="margin-top: 3rem">
+            <form id="login-form" class="login-form">
+                <h3 class="header-in-form">Login</h3>
+                <label for="email" class="space" style="color: white">Email</label><br>
+                <input id="email" type="email" placeholder="Email" class="space input-field"/><br>
+                <label for="password" class="space" style="color: white">Password</label><br>
+                <input id="password" type="password" placeholder="Password" class="space input-field"/><br>
+                <div class="flex-container">
+                <input type="submit" value="Login" class="space login-button"/>
+                <button type="button" id="logout-button" class="space logout-button">Logout</button>
+                </div>
+            </form>
+        </div>
+        <div class="flex-container" style="margin-top: 3rem">
+            <form id="register-form" class="login-form">
+                <h3 class="header-in-form">Register</h3>
+                <label for="email-register" class="space" style="color: white">Email</label><br>
+                <input id="email-register" type="email" placeholder="Email" class="space input-field"/><br>
+                <label for="password-register" class="space" style="color: white">Password</label><br>
+                <input id="password-register" type="password" placeholder="Password" class="space input-field"/><br>
+                <div class="flex-container">
+                    <input type="submit" value="Register" class="space login-button"/>
 
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="flex-container" style="margin-top: 3rem; flex-direction: column">
         <div class="flex-container" style="margin-top: 3rem; flex-direction: column">
             <button id="fetch-cars" class="fetchCarsButton">Lade Autos</button>

@@ -4,7 +4,6 @@ import {UserClaims, UserInput} from "../types/types";
 import {StatusCodes} from "http-status-codes";
 import {UserService} from "../service/user-service";
 import * as jwt from "jsonwebtoken";
-import {UserRepo} from "../repo/user-repo";
 
 export const userRouter = Router()
 
