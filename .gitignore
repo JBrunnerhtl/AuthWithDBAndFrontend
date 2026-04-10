@@ -8,5 +8,7 @@ yarn-error.log*
 /.pnp
 .pnp.js
 
+.env
+test.db
 .vscode/*
 .idea/
