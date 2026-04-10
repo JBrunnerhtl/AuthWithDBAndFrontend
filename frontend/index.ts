@@ -29,6 +29,9 @@ export async function login() {
         const {userClaims, expiresAt, accessToken } = await response.json();
         sessionStorage.setItem('token', accessToken)
     } catch (err) {
+        alert("Login failed. Please check your credentials and try again.");
+        email.value = "";
+        password.value = "";
         console.error(err);
     }
 }

@@ -1,0 +1,51 @@
+.flex-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.space {
+    margin: 10px;
+}
+
+.login-form {
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.input-field:focus {
+    transition: outline-color 200ms ease-in-out;
+    outline: 2px solid cadetblue;
+
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.login-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px;
+}
+.login-button:hover {
+    background-color: green;
+    color: white;
+    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+}
+
+.logout-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px;
+}
+.logout-button:hover {
+    background-color: red;
+    color: white;
+    transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+}
+
