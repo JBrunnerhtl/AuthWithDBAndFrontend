@@ -1,4 +1,4 @@
-import {UserDB} from "../types/types";
+import {UserDB, UserInput} from "../types/types";
 import {DB} from "../database/db";
 import Database from "better-sqlite3";
 export class UserRepo {
@@ -14,4 +14,26 @@ export class UserRepo {
             db.close();
         }
     }
+
+    public static createNewUser(user: UserInput) {
+        const db: Database.Database = DB.createConnection();
+        try {
+            DB.beginTransaction(db)
+            const stmt = db.prepare("Insert INTO Users(EMAIL, PASSWORD, ROLE) VALUES (?,?, 'user');")
+            const rows: number = stmt.run(user.email, user.password).changes;
+            if(rows === 0) {
+                throw new Error("User already exists");
+            }
+            DB.commitTransaction(db)
+        } catch (e) {
+            DB.rollbackTransaction(db)
+            if(e instanceof Error) {
+                throw new Error("User already exists");
+            }
+        }finally {
+            db.close();
+        }
+    }
+
+
 }

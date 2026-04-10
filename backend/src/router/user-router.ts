@@ -4,6 +4,7 @@ import {UserClaims, UserInput} from "../types/types";
 import {StatusCodes} from "http-status-codes";
 import {UserService} from "../service/user-service";
 import * as jwt from "jsonwebtoken";
+import {UserRepo} from "../repo/user-repo";
 
 export const userRouter = Router()
 
@@ -32,6 +33,18 @@ userRouter.post("/login", async (req: Request, res: Response) => {
     }catch(err) {
         if(err instanceof Error) {
             return res.status(StatusCodes.UNAUTHORIZED).send(err.message);
+        }
+    }
+})
+
+userRouter.post("/register", (req: Request, res: Response) => {
+    try {
+        const body: UserInput = req.body as UserInput;
+        UserService.createNewUser(body);
+        return res.status(StatusCodes.CREATED).send("User created successfully");
+    }catch(err) {
+        if(err instanceof Error) {
+            res.status(StatusCodes.BAD_REQUEST).send(err.message);
         }
     }
 })

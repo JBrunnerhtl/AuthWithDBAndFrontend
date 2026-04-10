@@ -21,4 +21,9 @@ export class UserService {
             }
         }
     }
+    public static createNewUser(user: UserInput) {
+        console.log(user);
+        if(user.email === undefined || user.email === null) throw new Error("User credentials are required");
+        UserRepo.createNewUser(user);
+    }
 }

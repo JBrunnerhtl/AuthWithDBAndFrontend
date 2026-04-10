@@ -55,4 +55,14 @@ export class DB {
             console.log(err)
         }
     }
+
+    public static beginTransaction(connection : Database.Database) : void {
+        connection.exec("begin transaction");
+    }
+    public static commitTransaction(connection : Database.Database) : void {
+        connection.exec("commit");
+    }
+    public static rollbackTransaction(connection : Database.Database) : void {
+        connection.exec("rollback");
+    }
 }

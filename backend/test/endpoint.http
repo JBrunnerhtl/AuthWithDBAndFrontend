@@ -28,3 +28,12 @@ authorization: Bearer {{token}}
 ###
 GET {{baseUrl}}/car/2
 authorization: Bearer {{tokenAdmin}}
+
+###
+POST {{baseUrl}}/auth/register
+content-type: application/json
+
+{
+    "email": "test2@gmail.com",
+    "password": "789"
+}
