@@ -1,6 +1,7 @@
 import {UserDB, UserInput} from "../types/types";
 import {DB} from "../database/db";
 import Database from "better-sqlite3";
+import * as bcrypt from "bcrypt";
 export class UserRepo {
     public static getAllUsers() : UserDB[] | undefined {
         const db: Database.Database = DB.createConnection();
@@ -20,7 +21,7 @@ export class UserRepo {
         try {
             DB.beginTransaction(db)
             const stmt = db.prepare("Insert INTO Users(EMAIL, PASSWORD, ROLE) VALUES (?,?, 'user');")
-            const rows: number = stmt.run(user.email, user.password).changes;
+            const rows: number = stmt.run(user.email, bcrypt.hashSync(user.password, 10)).changes;
             if(rows === 0) {
                 throw new Error("User already exists");
             }

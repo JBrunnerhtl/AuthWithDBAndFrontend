@@ -31,7 +31,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
         });
     }catch(err) {
         if(err instanceof Error) {
-            return res.status(StatusCodes.UNAUTHORIZED).send(err.message);
+            return res.status(StatusCodes.UNAUTHORIZED).send({message: err.message});
         }
     }
 })
@@ -40,10 +40,10 @@ userRouter.post("/register", (req: Request, res: Response) => {
     try {
         const body: UserInput = req.body as UserInput;
         UserService.createNewUser(body);
-        return res.status(StatusCodes.CREATED).send("User created successfully");
+        return res.status(StatusCodes.CREATED).send({message: "User created successfully"});
     }catch(err) {
         if(err instanceof Error) {
-            res.status(StatusCodes.BAD_REQUEST).send(err.message);
+            res.status(StatusCodes.BAD_REQUEST).send({message: err.message});
         }
     }
 })

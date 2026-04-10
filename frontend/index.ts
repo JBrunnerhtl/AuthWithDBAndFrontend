@@ -23,14 +23,27 @@ fetchSpecificCarButton.addEventListener("click", async (e) => {
     e.preventDefault();
     await fetchSpecificCar();
 })
-export async function login() {
+
+const registerForm = document.getElementById("register-form") as HTMLFormElement;
+registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    await register();
+})
+
+
+
+export async function login(parsedEmail: string = "", parsedPassword: string = "") {
     const email = document.getElementById("email") as HTMLInputElement;
     const password = document.getElementById("password") as HTMLInputElement;
     console.log(email.value);
     console.log(password.value);
-    const credentials: UserInput = {
+    let credentials: UserInput = {
         email: email.value,
         password: password.value,
+    }
+    if(parsedPassword !== "" && parsedEmail !== "") {
+        credentials.password = parsedPassword;
+        credentials.email = parsedEmail;
     }
     try {
         const response = await fetch(url + "/auth/login", {
@@ -57,6 +70,7 @@ export async function login() {
 
 export function logout() {
     sessionStorage.removeItem('token')
+    alert("You have been logged out");
 }
 
 
@@ -135,4 +149,34 @@ function createTable(cars: Car[], tableId: string) {
         tr.appendChild(tdName);
         carTable.appendChild(tr);
     });
+}
+
+export async function register() {
+    const email = document.getElementById("email-register") as HTMLInputElement;
+    const password = document.getElementById("password-register") as HTMLInputElement;
+    try {
+        const response = await fetch(url + "/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email.value,
+                password: password.value,
+            })
+        });
+        if(response.status !== StatusCodes.CREATED) {
+            const responseAuth: AuthErrorResponse = await response.json();
+            throw new Error(responseAuth.message);
+        }
+        alert("User registered successfully, you will be logged in now");
+        await login(email.value, password.value);
+    }catch(err) {
+        if(err instanceof Error) {
+            alert(err.message);
+        }
+    }finally {
+        email.value = "";
+        password.value = "";
+    }
 }
